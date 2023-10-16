@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const playlist = require("../models/Playlist");
-const Song =require("../models/song")
+const Song =require("../models/Song")
 const mongoose= require("mongoose");
 const { route } = require("./auth");
 
