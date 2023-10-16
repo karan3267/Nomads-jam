@@ -1,10 +1,9 @@
 import { useState } from "react";
-import Header from "../components/common/Header";
 import ImageUpload from "../components/common/ImageUpload";
-import SideBar from "../components/common/Sidebar";
 import TextInput from "../components/common/TextInput";
 import { authenticatedPostReq } from "../Utils/ServerHelpers";
 import { useNavigate } from "react-router-dom";
+import LoggedInWrapper from "../containers/LoggedInWrapper";
 
 const UploadSongs = () => {
   const [name,setName]=useState("")
@@ -24,16 +23,8 @@ const UploadSongs = () => {
     }
   }
   return (
-    <div className="flex h-full text-white">
-      <div className="w-1/5 h-full">
-        <SideBar />
-      </div>
-
-      <div className="w-4/5 h-full bg-black">
-        <div className="w-full h-1/10">
-          <Header />
-        </div>
-        <div className="w-full bg-black flex flex-col items-center justify-center">
+    <LoggedInWrapper>
+      <div className="w-full bg-black flex flex-col items-center justify-center">
           <div className="w-full flex justify-center text-white fomt-bold text-2xl p-4">
             Upload Your Song
           </div>
@@ -60,8 +51,7 @@ const UploadSongs = () => {
             Submit
           </div>
         </div>
-      </div>
-    </div>
+    </LoggedInWrapper>
   );
 };
 export default UploadSongs;

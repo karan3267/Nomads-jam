@@ -19,7 +19,7 @@ const SongCard = ({ info}) => {
       <div className="w-full flex">
         <div className="w-5/6 flex flex-col justify-center pl-3 w-full">
           <div className="">{info.name}</div>
-          <div className=" text-xs text-gray-500"></div>
+          <div className=" text-sm text-gray-500">{info.artist.firstName+" "+info.artist.lastName}</div>
         </div>
         <div className="w-1/6 text-xs text-gray-500 flex justify-center items-center">
           <div>duration</div>

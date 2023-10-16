@@ -8,6 +8,7 @@ import UploadSongs from "./routes/UploadSongs";
 import { useState } from "react";
 import MySongs from "./routes/MySongs";
 import songContext from "./contexts/SongContext";
+import  Search  from "./routes/Search";
 
 export default function App() {
   const [cookie] = useCookies(["token"]);
@@ -36,6 +37,7 @@ export default function App() {
               <Route path="/home" element={<HomeComponent />} />
               <Route path="/uploadsongs" element={<UploadSongs />} />
               <Route path="/mysongs" element={<MySongs />} />
+              <Route path="/search" element={<Search/>}/>
             </Routes>
           </songContext.Provider>
         ) : (

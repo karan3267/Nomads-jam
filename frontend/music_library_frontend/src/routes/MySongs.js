@@ -30,7 +30,7 @@ const MySongs = () => {
         <div className="font-bold text-whtie pl-2 pb-4">MySongs</div>
         <div className="space-y-2">
           {songData.map((item) => {
-            return <SongCard info={item} />;
+            return <SongCard info={item} key={JSON.stringify(item)}/>;
           })}
         </div>
       </div>

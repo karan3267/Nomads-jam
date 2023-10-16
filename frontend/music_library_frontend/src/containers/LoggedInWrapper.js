@@ -121,15 +121,20 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
         </div>
       </div>
       {currentSong && (
-        <div className="w-full h-1/8 bg-not-black flex">
+        <div className="w-full h-1/8 bg-not-black flex items-center">
           <div className="w-1/4 p-2 flex">
             <img
               src={currentSong.thumbnail}
               alt="song thumbnail"
               className="h-14 w-14 object-scale-down"
             />
-            <div className="text-gray-400 w-2/3 text-base">
-              {currentSong.name}
+            <div className="flex flex-col mx-3 w-2/3">
+              <div className="font-semibold text-lg">{currentSong.name}</div>
+              <div className="text-xs text-gray-500">
+                {currentSong.artist.firstName +
+                  " " +
+                  currentSong.artist.lastName}
+              </div>
             </div>
           </div>
           <div className="w-1/2 flex flex-col items-center">
@@ -147,7 +152,7 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
           <div className="w-1/6 h-full flex items-center justify-end pt-5">
             <div className="flex text-2xl">
               <Icon icon="tabler:volume" />
-              <input 
+              <input
                 className="w-full hover:cursor-pointer"
                 type="range"
                 min="0"
