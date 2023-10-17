@@ -17,7 +17,7 @@ const Search = () => {
 
   return (
     <LoggedInWrapper>
-      <div className="w-screen h-screen">
+      <div className="w-full h-full">
         <div
           className={`flex items-center p-3 rounded-full space-x-3 w-1/3 bg-gray-800 ${
             isInputFocused ? "border border-white" : ""

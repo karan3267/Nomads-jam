@@ -1,9 +1,10 @@
+import { useState } from "react";
 import { openUploadWidget } from "../../Utils/CloudinaryService.js";
 import { uploadPreset } from "../../Utils/Config.js";
 
 const ImageUpload = ({setUrl}) => {
+  const [isUplaoded,setIsUploaded]=useState(false)
   const uploadImageWidget = () => {
-    console.log();
     let myUploadWidget = openUploadWidget(
       {
         cloudName: "dqm4juhix",
@@ -25,7 +26,7 @@ const ImageUpload = ({setUrl}) => {
 
   return (
     <button className="text-black px-4 py-2 fonr-bold rounded-full bg-white" onClick={uploadImageWidget}>
-      Upload Song
+      {(!isUplaoded)?"Upload Song":"Song Uploaded to Cloud"}
     </button>
   );
 };

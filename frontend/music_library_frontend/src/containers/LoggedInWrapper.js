@@ -75,14 +75,15 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
     <div className="text-white w-screen h-screen">
       <div className={`${currentSong ? "h-7/8" : "h-full"} w-full flex`}>
         <div className="w-1/5 h-full">
-          <div className="w-full h-full border-r border-gray-900 bg-black">
+          <div className="sidebar w-full h-full border-r border-gray-900 bg-black">
             <Link to="/home">
               <div className="flex items-center justify-center font-bold ">
                 <Icon
-                  icon="arcticons:lark-player"
+                  icon="ph:finn-the-human-duotone"
                   className="w-20 h-20 my-3 px-2"
+                  color="white"
                 />
-                Music Lib
+                Nomads Jam
               </div>
             </Link>
             <div>
@@ -117,7 +118,7 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
           <div className="h-1/10 bg-not-black">
             <Header />
           </div>
-          <div className="p-8 w-full h-full bg-not-black">{children}</div>
+          <div className="p-8 w-full h-9/10 bg-not-black">{children}</div>
         </div>
       </div>
       {currentSong && (
