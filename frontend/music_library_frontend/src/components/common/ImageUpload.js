@@ -14,6 +14,7 @@ const ImageUpload = ({setUrl}) => {
       function (error, result) {
         if (!error && result.event === "success") {
           setUrl(result.info.secure_url);
+          setIsUploaded(true)
         } else {
           if (error) {
             console.log(error);
