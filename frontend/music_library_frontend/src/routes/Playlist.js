@@ -6,7 +6,7 @@ import SongCard from "../components/common/SongCard"
 
 const Playlist = () => {
 
-    const [playlistData,setPlaylistData]=useState([]);
+    // const [playlistData,setPlaylistData]=useState([]);
     const [songsData,setSongsData]=useState([])
     const location=useLocation()
 
@@ -15,9 +15,9 @@ const Playlist = () => {
         let items=[]
         async function fetchData() {
             items = await authenticatedGetReq("/playlist/get/playlist/"+location.state.Id);   //it should wait for data and then setData
-            setPlaylistData(items);
+            // setPlaylistData(items);
             // console.log(items)
-            console.log(items.playlistData.songs)
+            // console.log(items.playlistData.songs)
             async function getSongsData(){
                 const songsArray=await authenticatedGetReq("/song/get/songid/"+items.playlistData.songs)
                 setSongsData(songsArray.data)
@@ -32,7 +32,7 @@ const Playlist = () => {
     <LoggedInWrapper activeScreen="playlist">
 
       <div>
-        {console.log(songsData)}
+        {/* {console.log(songsData)} */}
         {songsData.map((data)=>{return <SongCard info={data} key={JSON.stringify(data)}/>})}
       </div>
     </LoggedInWrapper>

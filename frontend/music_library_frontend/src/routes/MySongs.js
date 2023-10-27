@@ -29,7 +29,7 @@ const MySongs = () => {
       <div className="content p-8">
         <div className="font-bold text-whtie pl-2 pb-4">MySongs</div>
         <div className="space-y-2">
-          {console.log(songData)}
+          {/* {console.log(songData)} */}
           {songData.map((item) => {
             return <SongCard info={item} key={JSON.stringify(item)}/>;
           })}
