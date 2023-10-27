@@ -10,6 +10,7 @@ const cors =require("cors")
 const User = require("./models/User")
 require("dotenv").config()
 const app = express();
+const CorsOptions={origin:""}
 app.use(cors())
 app.use(express.json())
 

@@ -55,4 +55,22 @@ router.get(
   }
 );
 
+router.get(
+  "/get/songid/:songId",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const { songId } = req.params;
+    const songIds=songId.split(',')
+    const songData=[]
+    for(var i=0;i<songIds.length;i++){
+      const song = await Song.findOne({ _id: songIds[i] }).populate("artist");
+      if (!song) {
+        res.status(404).json({ err: "Cannot find the requested song" });
+      }
+      songData[i]=(song)
+    }
+    return res.status(200).json({ data:songData });
+  }
+);
+
 module.exports = router;

@@ -30,7 +30,7 @@ const Search = () => {
             <input
               type="text"
               className="w-full bg-gray-800 focus:outline-none"
-              placeHolder=" Type a song name here"
+              placeholder=" Type a song name here"
               onFocus={() => {
                 setInputFocused(true);
               }}

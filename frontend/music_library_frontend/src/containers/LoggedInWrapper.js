@@ -28,7 +28,7 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
       volume: 0.5,
     });
     setSongPlaying(sound);
-    sound.play();
+    sound.play()
     setIsplaying(true);
   };
 
@@ -48,7 +48,6 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
     if (!currentSong) {
       return;
     }
-    console.log("here");
     changeSong(currentSong.track);
   }, [currentSong && currentSong.track]);
 

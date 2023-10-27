@@ -6,9 +6,15 @@ const Playlist = new mongoose.Schema({
         type:String,
         require:true
     },
-    thumnail:{
+    tags:[{
+        type:String,
+    }],
+    thumbnail:{
         type:String,
         require:true
+    },
+    description:{
+        type:String
     },
     owner:{
         type:mongoose.Types.ObjectId,
@@ -18,6 +24,7 @@ const Playlist = new mongoose.Schema({
         type:mongoose.Types.ObjectId,
         ref:"song"
     }],
+    collaborators:[]
 })
 
 const playlistModal = mongoose.model("playlist",Playlist)

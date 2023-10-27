@@ -4,13 +4,12 @@ const passport = require("passport");
 const playlist = require("../models/Playlist");
 const Song =require("../models/Song")
 const mongoose= require("mongoose");
-const { route } = require("./auth");
 
 router.post(
   "/create/playlist",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
-    const { playlistName, thumbnail, songs } = req.body;
+    const { playlistName, thumbnail, songs,tags,description } = req.body;
     if (!playlistName || !thumbnail || !songs) {
       return res
         .status(301)
@@ -21,6 +20,8 @@ router.post(
       playlistName,
       thumbnail,
       songs,
+      description,
+      tags,
       owner,
       collaborators: [],
     };
@@ -34,8 +35,10 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     const playlistId = req.params.playlistId;
-    const playlistData=await playlist.findOne({_id:playlistId})
-    if(!playlistData){
+    var playlistData=await playlist.findOne({_id:playlistId})
+    var songData=playlistData
+    if (!playlistData)
+    {
         return res.status(301).json({err:"Invalid Id"})
     }else{
         return res.status(200).json({playlistData})
@@ -61,13 +64,25 @@ router.get(
     }
   );
 
+  router.get(
+    "/get/all/playlists",
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
+      const playlistData=await playlist.find()
+      if(!playlistData){
+          return res.status(301).json({err:"Playlists does not exist"})
+      }else{
+          return res.status(200).json(playlistData)
+      }
+    }
+  );
   router.post("/add/song",passport.authenticate("jwt",{session:false}),async (req,res)=>{
     const currentUser = req.user
-    if(currentUser!==owner && currentUser!==collaborators){
-        return res.status(405).json({err:"Not Allowed"})
-    }
     const {playlistId,songId}=req.body
     const playlists=await playlist.findOne({_id:playlistId})
+    // if(currentUser!==playlists.owner && currentUser!==playlists.collaborators){
+    //     return res.status(405).json({err:"Not Allowed"})
+    // }
     if(!playlistId){
         return res.status(301).json({err:"Playlist doesn't exists"})
     }
