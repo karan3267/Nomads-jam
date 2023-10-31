@@ -1,15 +1,23 @@
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
-const Header = () => {
+const Header = ({activeScreen}) => {
+  var tf=(activeScreen==="library")
   const [cookie] = useCookies(["token"]);
   if (cookie) {
     return (
       <div className="w-full h-full flex items-center rounded-l space-x-4 bg-gray-800 justify-end">
         <div className="w-1/3 justify-end flex items-center text-black mr-3 h-full">
-          <div className=" text-gray-400 hover:text-white rounded-full text-sm px-3">
+         {tf && 
+         <div className=" text-gray-400 hover:text-white rounded-full text-sm px-3">
+              <Link to="/createplaylist">Create pLaylist</Link> 
+          </div>
+         }
+         {!tf&&
+          <div className="text-gray-400 hover:text-white rounded-full text-sm px-3">
             <Link to="/uploadsongs">Upload Song</Link>
           </div>
+         }
           <div className="border border-solid border-gray-300 mx-3 h-1/2"></div>
           <div className="bg-white hover:bg-green-400 py-2 rounded-full px-4">
             K

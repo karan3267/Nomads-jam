@@ -33,6 +33,8 @@ const Playlist = () => {
 
       <div>
         {/* {console.log(songsData)} */}
+        <div>
+        </div>
         {songsData.map((data)=>{return <SongCard info={data} key={JSON.stringify(data)}/>})}
       </div>
     </LoggedInWrapper>

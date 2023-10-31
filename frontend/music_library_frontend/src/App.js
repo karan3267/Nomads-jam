@@ -10,6 +10,8 @@ import MySongs from "./routes/MySongs";
 import songContext from "./contexts/SongContext";
 import  Search  from "./routes/Search";
 import Playlist from "./routes/Playlist";
+import Library from "./routes/Library"
+import CreatePlaylist from "./routes/CreatePlaylist"
 
 export default function App() {
   const [cookie] = useCookies(["token"]);
@@ -40,6 +42,8 @@ export default function App() {
               <Route path="/mysongs" element={<MySongs />} />
               <Route path="/search" element={<Search/>}/>
               <Route path="/playlist" element={<Playlist/>}/>
+              <Route path="/library" element={<Library/>}/>
+              <Route path="/createplaylist" element={<CreatePlaylist/>}/>
             </Routes>
           </songContext.Provider>
         ) : (

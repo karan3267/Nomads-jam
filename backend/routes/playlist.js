@@ -3,7 +3,9 @@ const router = express.Router();
 const passport = require("passport");
 const playlist = require("../models/Playlist");
 const Song =require("../models/Song")
+const User=require('../models/User')
 const mongoose= require("mongoose");
+const playlistModal = require("../models/Playlist");
 
 router.post(
   "/create/playlist",
@@ -15,7 +17,7 @@ router.post(
         .status(301)
         .json({ err: "Insufficeint data to create playlist" });
     }
-    const owner = req.user._Id;
+    const owner = req.user._id;
     const details = {
       playlistName,
       thumbnail,
@@ -51,7 +53,7 @@ router.get(
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
       const artistId = req.params.aritstId;
-      const artist = await mongoose.findOne({_id:artistId})
+      const artist = await User.findOne({_id:artistId})
       if(!artist){
         return res.status(301).json({err:"Artist dose not exist"})
       }
@@ -60,6 +62,26 @@ router.get(
           return res.status(301).json({err:"Playlist by the user does not exist"})
       }else{
           return res.status(200).json({playlistData})
+      }
+    }
+  );
+
+  router.get(
+    "/get/myplaylists",
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
+      const artistId = req.user._id;
+      const artist = await User.findOne({_id:artistId})
+      console.log(artist)
+      if(!artist){
+        return res.status(301).json({err:"Artist dose not exist"})
+      }
+      const playlistData=await playlist.find({owner:artistId})
+      console.log(playlistData)
+      if(!playlistData){
+          return res.status(301).json({err:"Playlist by the user does not exist"})
+      }else{
+          return res.status(200).json({data:playlistData})
       }
     }
   );

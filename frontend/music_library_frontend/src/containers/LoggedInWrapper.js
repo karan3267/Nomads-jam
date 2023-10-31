@@ -79,7 +79,7 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
               <div className="flex items-center justify-center font-bold ">
                 <Icon
                   icon="ph:finn-the-human-duotone"
-                  className="w-20 h-20 my-3 px-2"
+                  className="w-20 h-1/10 my-3 px-2"
                   color="white"
                 />
                 Nomads Jam
@@ -100,9 +100,9 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
               />
               <IconText
                 icon={"fluent:library-16-filled"}
-                displayText={"PlayList"}
-                route={"/playlist"}
-                active={activeScreen === "playlist"}
+                displayText={"Library"}
+                route={"/library"}
+                active={activeScreen === "library"}
               />
               <IconText
                 icon={"ri:folder-music-line"}
@@ -115,7 +115,7 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
         </div>
         <div className="w-4/5 h-full content bg-not-black overflow-auto">
           <div className="h-1/10 bg-not-black">
-            <Header />
+            <Header activeScreen={activeScreen}/>
           </div>
           <div className="p-8 w-full h-9/10 bg-not-black">{children}</div>
         </div>
@@ -125,7 +125,7 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
           <div className="w-1/4 p-2 flex">
             <img
               src={currentSong.thumbnail}
-              alt="song thumbnail"
+              alt="song thumbnail" 
               className="h-14 w-14 object-scale-down"
             />
             <div className="flex flex-col mx-3 w-2/3">
