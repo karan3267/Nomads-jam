@@ -19,6 +19,7 @@ export default function App() {
   const [isPlaying, setIsplaying] = useState(false);
   const [songPlaying, setSongPlaying] = useState(null);
   const [volume, setVolume] = useState(0.5);
+  const [progress,setProgress]=useState(0)
   return (
     <div className="App w-screen h-screen">
       <BrowserRouter>
@@ -33,6 +34,7 @@ export default function App() {
               setSongPlaying,
               volume,
               setVolume,
+              progress,setProgress
             }}
           >
             <Routes>

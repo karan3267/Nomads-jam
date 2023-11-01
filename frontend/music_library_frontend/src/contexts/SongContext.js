@@ -8,5 +8,7 @@ const songContext = createContext({
   setSongPlaying: () => {},
   volume: 0.5,
   setVolume: () => {},
+  progress:0,
+  setProgress:()=>{},
 });
 export default songContext;

@@ -19,6 +19,8 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
     setIsplaying,
     volume,
     setVolume,
+    progress,
+    setProgress
   } = useContext(songContext);
 
   const changeSong = (soundSrc) => {
@@ -75,7 +77,30 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
     songPlaying.pause();
   };
 
-  
+  useEffect(() => {
+    if (songPlaying) {
+      songPlaying.on("play", () => {
+        // Start a timer to update the progress bar
+        const progressInterval = setInterval(() => {
+          const currentProgress =
+            (songPlaying.seek() / songPlaying.duration()) * 100;
+          setProgress(currentProgress);
+        }, 1000); // Update every second
+        return () => clearInterval(progressInterval);
+      });
+
+      songPlaying.on("end", () => {
+        // Reset the progress when the audio ends
+        setProgress(0);
+      });
+    }
+  }, [songPlaying]);
+  const handleProgressChange = (e) => {
+    // Calculate the new position in the audio track based on the input value
+    const newPosition = (e.target.value / 100) * songPlaying.duration();
+    songPlaying.seek(newPosition);
+    setProgress(e.target.value);
+  };
 
   return (
     <div className="text-white w-screen h-screen">
@@ -136,7 +161,9 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
           <div className="h-1/10 bg-not-black">
             <Header activeScreen={activeScreen} />
           </div>
-          <div className="p-8 w-full h-9/10 bg-not-black overflow-auto">{children}</div>
+          <div className="p-8 w-full h-9/10 bg-not-black overflow-auto">
+            {children}
+          </div>
         </div>
       </div>
       {currentSong && (
@@ -166,7 +193,16 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
               />
               <Icon icon="fluent:next-48-filled" fontSize={30} />
             </div>
-            <div>progress bar</div>
+            <div >
+              <input
+                type="range"
+                min="0"
+                max="100"
+                step="1"
+                value={progress}
+                onChange={handleProgressChange}
+              />
+            </div>
           </div>
           <div className="w-1/6 h-full flex items-center justify-end pt-5">
             <div className="flex text-2xl">
