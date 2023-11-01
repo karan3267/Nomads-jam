@@ -2,7 +2,7 @@ import DisplayCard from "./common/Card";
 
 const PlayListView = ({ cardsData }) => {
   return (
-    <div className="w-60 mt-7 ">
+    <div className="lg:w-60 w-30 mt-7">
       <div className="w-full">
         <DisplayCard
           title={cardsData.playlistName}

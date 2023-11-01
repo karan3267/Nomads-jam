@@ -1,12 +1,15 @@
 import { Icon } from "@iconify/react";
 import Header from "../components/common/Header";
 import IconText from "../components/common/IconText";
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Howl } from "howler";
 import songContext from "../contexts/SongContext";
 import { Link } from "react-router-dom";
+import CreatePlaylist from "../routes/CreatePlaylist";
 
 const LoggedInWrapper = ({ children, activeScreen }) => {
+  const [isCreatePlaylistModalIsOpen, setIsCreatePlaylistModalIsOpen] =
+    useState(false);
   const {
     currentSong,
     setCurrentSong,
@@ -28,7 +31,7 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
       volume: 0.5,
     });
     setSongPlaying(sound);
-    sound.play()
+    sound.play();
     setIsplaying(true);
   };
 
@@ -67,16 +70,25 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
     }
     songPlaying.play();
   };
+
   const pauseSong = () => {
     songPlaying.pause();
   };
+
+  
+
   return (
     <div className="text-white w-screen h-screen">
+      {isCreatePlaylistModalIsOpen && (
+        <CreatePlaylist
+          closeModal={() => setIsCreatePlaylistModalIsOpen(false)}
+        />
+      )}
       <div className={`${currentSong ? "h-7/8" : "h-full"} w-full flex`}>
-        <div className="w-1/5 h-full">
-          <div className="sidebar w-full h-full border-r border-gray-900 bg-black">
+        <div className="lg:w-1/5 h-full bg-black">
+          <div className="hidden lg:block sidebar w-full h-full border-r border-gray-900 bg-black">
             <Link to="/home">
-              <div className="flex items-center justify-center font-bold ">
+              <div className="flex items-center justify-center font-bold">
                 <Icon
                   icon="ph:finn-the-human-duotone"
                   className="w-20 h-1/10 my-3 px-2"
@@ -110,14 +122,21 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
                 route={"/mysongs"}
                 active={activeScreen === "mySongs"}
               />
+              <IconText
+                icon="ant-design:file-add-outlined"
+                displayText={"Create playlist"}
+                onClick={() => {
+                  setIsCreatePlaylistModalIsOpen(true);
+                }}
+              />
             </div>
           </div>
         </div>
-        <div className="w-4/5 h-full content bg-not-black overflow-auto">
+        <div className=" w-full lg:w-4/5  h-full content bg-not-black overflow-auto">
           <div className="h-1/10 bg-not-black">
-            <Header activeScreen={activeScreen}/>
+            <Header activeScreen={activeScreen} />
           </div>
-          <div className="p-8 w-full h-9/10 bg-not-black">{children}</div>
+          <div className="p-8 w-full h-9/10 bg-not-black overflow-auto">{children}</div>
         </div>
       </div>
       {currentSong && (
@@ -125,7 +144,7 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
           <div className="w-1/4 p-2 flex">
             <img
               src={currentSong.thumbnail}
-              alt="song thumbnail" 
+              alt="song thumbnail"
               className="h-14 w-14 object-scale-down"
             />
             <div className="flex flex-col mx-3 w-2/3">
@@ -168,4 +187,5 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
     </div>
   );
 };
+
 export default LoggedInWrapper;

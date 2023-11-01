@@ -2,6 +2,7 @@ import { useEffect, useState} from "react"
 import LoggedInWrapper from "../containers/LoggedInWrapper"
 import { authenticatedGetReq } from "../Utils/ServerHelpers"
 import PlayListView from "../components/PlayListView"
+import CreatePlaylist from "./CreatePlaylist"
 
 const Library=()=>{
     const [myPlaylistsData,setMyPlaylistsData]=useState([])
@@ -17,6 +18,7 @@ const Library=()=>{
       }, []);
 return(
     <LoggedInWrapper activeScreen="library">
+      
         <div className="w-full h-full">
       <div className="text-2xl font-bold mb-5">PLaylists</div>
       <div className="flex space-x-3 h-50">

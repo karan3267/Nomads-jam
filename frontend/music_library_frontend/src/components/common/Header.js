@@ -1,12 +1,67 @@
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { useState } from "react";
+import IconText from "./IconText";
+import { Icon } from "@iconify/react";
 
 const Header = ({activeScreen}) => {
   var tf=(activeScreen==="library")
   const [cookie] = useCookies(["token"]);
+  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isCreatePlaylistModalIsOpen, setIsCreatePlaylistModalIsOpen] =
+    useState(false);
+
+  const toggleNav = () => {
+    setIsNavOpen(!isNavOpen);
+  };
   if (cookie) {
     return (
       <div className="w-full h-full flex items-center rounded-l space-x-4 bg-gray-800 justify-end">
+        <div className="w-full flex items-start ">
+        <div className="sm:hidden flex items-center justify-center">
+            <div
+              onClick={toggleNav}
+              className="px-4 py-2 cursor-pointer text-white hover:text-gray-300"
+            >
+              <Icon icon="carbon:menu" fontSize={24} />
+            </div>
+            {isNavOpen && (
+              <div className="bg-slate-700 mt-40 z-10 rounded-md pb-3">
+                <IconText
+                  icon={"material-symbols:home"}
+                  displayText={"Home"}
+                  active={activeScreen === "home"}
+                  route={"/home"}
+                />
+                <IconText
+                  icon={"material-symbols:search"}
+                  displayText={"Search"}
+                  route={"/search"}
+                  active={activeScreen === "search"}
+                />
+                <IconText
+                  icon={"fluent:library-16-filled"}
+                  displayText={"Library"}
+                  route={"/library"}
+                  active={activeScreen === "library"}
+                />
+                <IconText
+                  icon={"ri:folder-music-line"}
+                  displayText={"MySongs"}
+                  route={"/mysongs"}
+                  active={activeScreen === "mySongs"}
+                />
+                <IconText
+                  icon="ant-design:file-add-outlined"
+                  displayText={"Create playlist"}
+                  onClick={() => {
+                    setIsCreatePlaylistModalIsOpen(true);
+                  }}
+                />
+              </div>
+            )}
+          </div>
+        </div>
         <div className="w-1/3 justify-end flex items-center text-black mr-3 h-full">
          {tf && 
          <div className=" text-gray-400 hover:text-white rounded-full text-sm px-3">
