@@ -6,7 +6,7 @@ import { Howl } from "howler";
 import songContext from "../contexts/SongContext";
 import { Link } from "react-router-dom";
 import CreatePlaylist from "../routes/CreatePlaylist";
-
+import "./LoggedInWrapper.css"
 const LoggedInWrapper = ({ children, activeScreen }) => {
   const [isCreatePlaylistModalIsOpen, setIsCreatePlaylistModalIsOpen] =
     useState(false);
@@ -20,7 +20,7 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
     volume,
     setVolume,
     progress,
-    setProgress
+    setProgress,
   } = useContext(songContext);
 
   const changeSong = (soundSrc) => {
@@ -193,8 +193,9 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
               />
               <Icon icon="fluent:next-48-filled" fontSize={30} />
             </div>
-            <div >
+            <div className="w-full flex items-center justify-center">
               <input
+              className="w-1/2 hover:cursor-pointer "
                 type="range"
                 min="0"
                 max="100"
@@ -205,8 +206,10 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
             </div>
           </div>
           <div className="w-1/6 h-full flex items-center justify-end pt-5">
-            <div className="flex text-2xl">
+            <div className="flex text-2xl items-center justify-center">
               <Icon icon="tabler:volume" />
+              <div className="h-1 flex items-center justify-center">
+
               <input
                 className="w-full hover:cursor-pointer"
                 type="range"
@@ -216,6 +219,7 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
                 value={volume}
                 onChange={handleChange}
               />
+              </div>
             </div>
           </div>
         </div>
