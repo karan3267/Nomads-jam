@@ -48,7 +48,7 @@ const HomeComponent = () => {
     <LoggedInWrapper activeScreen={"home"} >
       <div className="w-full h-full">
       <div className="text-2xl font-bold mb-5">PLaylists</div>
-      <div className=" flex space-x-3">
+      <div className=" flex max-lg:flex-wrap gap-3 items-center justify-center">
       {playlistData.map((item) => {
           return <PlayListView  cardsData={item} key={JSON.stringify(item)}/>
          })}
