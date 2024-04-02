@@ -6,6 +6,7 @@ const passport = require("passport")
 const authRoutes = require("./routes/auth")
 const songRoutes = require("./routes/SongRoutes")
 const playlistRoutes= require("./routes/playlist")
+const userRoutes=require("./routes/user")
 const cors =require("cors")
 const User = require("./models/User")
 require("dotenv").config()
@@ -14,7 +15,7 @@ const CorsOptions={origin:""}
 app.use(cors())
 app.use(express.json())
 
-mongoose.connect("mongodb+srv://karanreddy3267:" + process.env.Mongo_Password + "@cluster0.omcuk69.mongodb.net/?retryWrites=true&w=majority",
+mongoose.connect("mongodb+srv://karanreddy3267:Drew-3267@cluster0.omcuk69.mongodb.net/?retryWrites=true&w=majority",
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -49,6 +50,7 @@ app.get("/api", (req, res) => {
 app.use("/auth", authRoutes)
 app.use("/song", songRoutes)
 app.use("/playlist",playlistRoutes)
+app.use("/user",userRoutes);
 
 app.listen(8000, () => {
     console.log("Apps is up")

@@ -26,7 +26,7 @@ const ImageUpload = ({setUrl}) => {
   };
 
   return (
-    <button className="text-black px-4 py-2 fonr-bold rounded-full bg-white" onClick={uploadImageWidget}>
+    <button className="text-black px-4 py-2 fonr-bold rounded-full bg-white hover:cursor-pointer" onClick={uploadImageWidget}>
       {(!isUplaoded)?"Upload Song":"Song Uploaded to Cloud"}
     </button>
   );

@@ -24,11 +24,11 @@ const UploadSongs = () => {
   }
   return (
     <LoggedInWrapper>
-      <div className="w-full bg-black flex flex-col items-center justify-center">
+      <div className="w-full bg-black flex flex-col items-center justify-center gap-3 py-4">
           <div className="w-full flex justify-center text-white fomt-bold text-2xl p-4">
             Upload Your Song
           </div>
-          <div className="w-2/3 space-x-4 flex">
+          <div className="w-2/3 flex max-md:flex-col items-center justify-center gap-3">
             <TextInput
               lable="Song name"
               placeholder="Enter Song name"
@@ -37,8 +37,8 @@ const UploadSongs = () => {
             />
             <div className="w-full">
               <TextInput
-                lable="Thumbnail"
-                placeholder="Please provide thumbnail for the song"
+                lable="Thumbnail URL"
+                placeholder="Please provide thumbnail URL for the song"
                 value={thumbnail}
                 setValue={setThumbnail}
               />
@@ -47,7 +47,7 @@ const UploadSongs = () => {
           <div className="pt-4">
             <ImageUpload setUrl={setUrl}/>
           </div>
-          <div className="mt-5 text-black rounded-full bg-white px-3 py-2" onClick={submitSong}>
+          <div className="mt-5 text-black rounded-full bg-white px-3 py-2 hover:bg-green-500 hover:cursor-pointer" onClick={submitSong}>
             Submit
           </div>
         </div>

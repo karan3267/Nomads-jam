@@ -101,7 +101,7 @@ const RegisterComponent = () => {
             <Link to="/login">Login Instead</Link>
           </div>
           <botton
-            className="hover:bg-gray-500 hover:text-black px-4 py-2 bg-green-500 hover:bg-green-600 rounded-full font-semibold"
+            className=" hover:text-black px-4 py-2 bg-green-500 hover:bg-green-600 rounded-full font-semibold"
             onClick={(e) => {
               e.preventDefault();
               signUp();

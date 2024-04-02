@@ -6,13 +6,12 @@ import { Howl } from "howler";
 import songContext from "../contexts/SongContext";
 import { Link } from "react-router-dom";
 import CreatePlaylist from "../routes/CreatePlaylist";
-import "./LoggedInWrapper.css"
+import "./LoggedInWrapper.css";
 const LoggedInWrapper = ({ children, activeScreen }) => {
   const [isCreatePlaylistModalIsOpen, setIsCreatePlaylistModalIsOpen] =
     useState(false);
   const {
     currentSong,
-    setCurrentSong,
     songPlaying,
     setSongPlaying,
     isPlaying,
@@ -91,10 +90,12 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
 
       songPlaying.on("end", () => {
         // Reset the progress when the audio ends
-        setProgress(0);
+        if (progress !== 0) {
+          setProgress(0);
+        }
       });
     }
-  }, [songPlaying]);
+  }, [songPlaying, setProgress]);
   const handleProgressChange = (e) => {
     // Calculate the new position in the audio track based on the input value
     const newPosition = (e.target.value / 100) * songPlaying.duration();
@@ -103,15 +104,15 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
   };
 
   return (
-    <div className="text-white w-screen h-screen">
+    <div className="text-white w-screen h-screen bg-not-black">
       {isCreatePlaylistModalIsOpen && (
         <CreatePlaylist
           closeModal={() => setIsCreatePlaylistModalIsOpen(false)}
         />
       )}
-      <div className={`${currentSong ? "h-7/8" : "h-full"} w-full flex`}>
+      <div className={`${currentSong ? "h-7/8" : "h-full"} w-full flex `}>
         <div className="lg:w-1/5 h-full bg-black">
-          <div className="hidden lg:block sidebar w-full h-full border-r border-gray-900 bg-black">
+          <div className="hidden lg:block sidebar w-full h-full border-r border-gray-900 ">
             <Link to="/home">
               <div className="flex items-center justify-center font-bold">
                 <Icon
@@ -157,17 +158,15 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
             </div>
           </div>
         </div>
-        <div className=" w-full lg:w-4/5  h-full content bg-not-black overflow-auto">
-          <div className="h-1/10 bg-not-black">
+        <div className=" w-full lg:w-4/5  h-full content  overflow-auto">
+          <div className="h-1/10 ">
             <Header activeScreen={activeScreen} />
           </div>
-          <div className="p-8 w-full h-9/10 bg-not-black overflow-auto">
-            {children}
-          </div>
+          <div className="p-8 w-full h-9/10  overflow-auto">{children}</div>
         </div>
       </div>
       {currentSong && (
-        <div className="w-full h-1/8 bg-not-black flex items-center">
+        <div className="w-full h-1/8 flex items-center">
           <div className="w-1/4 p-2 flex">
             <img
               src={currentSong.thumbnail}
@@ -195,7 +194,7 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
             </div>
             <div className="w-full flex items-center justify-center">
               <input
-              className="w-1/2 hover:cursor-pointer "
+                className="w-1/2 hover:cursor-pointer "
                 type="range"
                 min="0"
                 max="100"
@@ -209,16 +208,15 @@ const LoggedInWrapper = ({ children, activeScreen }) => {
             <div className="flex text-2xl items-center justify-center">
               <Icon icon="tabler:volume" />
               <div className="h-1 flex items-center justify-center">
-
-              <input
-                className="w-full hover:cursor-pointer"
-                type="range"
-                min="0"
-                max="1"
-                step=".05"
-                value={volume}
-                onChange={handleChange}
-              />
+                <input
+                  className="w-full hover:cursor-pointer"
+                  type="range"
+                  min="0"
+                  max="1"
+                  step=".05"
+                  value={volume}
+                  onChange={handleChange}
+                />
               </div>
             </div>
           </div>
