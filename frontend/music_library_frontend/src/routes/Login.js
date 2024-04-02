@@ -55,21 +55,21 @@ const LoginComponent = () => {
         />
         <div className=" w-full flex items-center justify-end">
           <botton
-            className="bg-green-400 hover:bg-green-600 hover:text-gray-800 hover:cursor-pointer rounded-full p-3 px-5 my-5 font-semibold text-lg"
+            className="bg-green-400 hover:bg-green-600 hover:text-gray-800 hover:cursor-pointer rounded-full py-2 px-4 font-semibold text-lg"
             onClick={(e) => {
               e.preventDefault();
               login();
             }}
           >
-            Log in
+            Login
           </botton>
         </div>
-        <div className="w-full p-3 flex flex-col items-center justify-center font-semibold text-gray-400">
+        <div className="w-full flex flex-col items-center justify-center font-semibold text-gray-400">
           Guest credentials:
           <div>Email: test@mail.com</div>
           <div>password: password</div>
         </div>
-        <div className="w-full flex items-center justify-center p-3 text-xl  font-semibold">
+        <div className="w-full flex items-center justify-center my-2 text-lg  font-semibold">
           Dont have an Account?
         </div>
         <div className="w-1/2 py-2 border border-solid border-gray-500 flex items-center justify-center rounded-full text-gray-500 font-semibold hover:cursor-pointer hover:bg-gray-500 hover:text-white">
