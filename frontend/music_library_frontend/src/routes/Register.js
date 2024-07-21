@@ -4,10 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { unauthenticatedPostReq } from "../Utils/ServerHelpers";
 import { useCookies } from "react-cookie";
+import Loading from "../components/common/Loading";
 
 const RegisterComponent = () => {
   const [email, setEmail] = useState("");
   const [confirmEmail, setConfirmEmail] = useState("");
+  const [isLoading,setIsLoading]=useState(false);
   const [password, setPassword] = useState("");
   const [username, setUserName] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -18,6 +20,7 @@ const RegisterComponent = () => {
     if (email !== confirmEmail) {
       alert("Email and confirm email fields must match, Please check again");
     }
+    setIsLoading(true);
     const data = { email, password, firstName, lastName, username };
     const response = await unauthenticatedPostReq("/auth/register", data);
     if (response && !response.err && !response.error) {
@@ -25,12 +28,18 @@ const RegisterComponent = () => {
       const date = new Date();
       date.setDate(date.getDate() + 30);
       setCookie("token", token, { path: "/", expires: date });
-      alert("sucess");
+      setIsLoading(false);
       navigate("/home");
     } else {
-      alert("Failure");
+      alert("Your request failed! Please try again");
     }
   };
+
+  if(isLoading){
+    return(
+      <Loading/>
+    )
+  }
 
   return (
     <div className="w-screen h-screen flex flex-col items-center bg-not-black text-white gap-3">

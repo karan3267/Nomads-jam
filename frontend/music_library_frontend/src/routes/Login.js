@@ -4,27 +4,33 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
 import { unauthenticatedPostReq } from "../Utils/ServerHelpers";
+import Loading from "../components/common/Loading";
 const LoginComponent = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [cookie, setCookie] = useCookies(["token"]);
   const navigate = useNavigate();
   const login = async () => {
     const data = { email, password };
+    setIsLoading(true);
     const response = await unauthenticatedPostReq("/auth/login", data);
     if (response && !response.err && !response.error) {
       const token = response.token;
       const date = new Date();
       date.setDate(date.getDate() + 30);
       setCookie("token", token, { path: "/", expires: date });
-      alert("sucess");
+      setIsLoading(false);
       navigate("/home");
     } else {
       console.log(response);
-      alert("Failure");
+      alert("Something went wrong! please try again");
     }
   };
 
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div className="w-full h-full flex flex-col items-center bg-black text-white">
       <div className=" w-full flex justify-center">
